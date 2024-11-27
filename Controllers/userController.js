@@ -51,9 +51,29 @@ export const loginUser = async (req, res) => {
 
 export const bookGas = async (req, res) => {
   try {
-    const { email, product, quantity, fullName, address, date, timeSlot, phoneNumber, totalPrice } = req.body;
-
-    if (!email || !product || !quantity || !fullName || !address || !date || !timeSlot || !phoneNumber || !totalPrice) {
+    const {
+      email,
+      product,
+      quantity,
+      fullName,
+      address,
+      date,
+      timeSlot,
+      phoneNumber,
+      totalPrice
+    } = req.body;
+    console.log(req.body);
+    if (
+      !email ||
+      !product ||
+      !quantity ||
+      !fullName ||
+      !address ||
+      !date ||
+      !timeSlot ||
+      !phoneNumber ||
+      !totalPrice
+    ) {
       return res.status(400).json({ message: "All fields are mandatory!" });
     }
 
@@ -67,44 +87,47 @@ export const bookGas = async (req, res) => {
       timeSlot,
       phoneNumber,
       totalPrice,
-      paymentStatus: "Pending",
+      paymentStatus: "Pending"
     });
+    console.log({ newBooking });
     await newBooking.save();
 
     const razorpay = new Razorpay({
       key_id: process.env.RAZOR_PAY_ID,
-      key_secret: process.env.RAZOR_PAY_SECRET_KEY,
+      key_secret: process.env.RAZOR_PAY_SECRET_KEY
     });
 
     const options = {
       amount: Number(totalPrice) * 100,
       currency: "INR",
       receipt: newBooking._id.toString(),
-      payment_capture: 1,
+      payment_capture: 1
     };
 
     const order = await razorpay.orders.create(options);
-
-    if (!order || order.status !== 'created') {
-      return res.status(500).json({ message: "Error in placing Razorpay order!" });
+    console.log({ order });
+    if (!order || order.status !== "created") {
+      return res
+        .status(500)
+        .json({ message: "Error in placing Razorpay order!" });
     }
 
-    
     newBooking.razorpayOrderId = order.id;
     await newBooking.save();
 
     res.status(200).json({
       message: "Your order has been placed successfully!",
-      order,
+      order
     });
 
     console.log(newBooking);
   } catch (error) {
     console.error("Error in bookGas:", error);
-    res.status(500).json({ message: "An error occurred while placing the order!" });
+    res
+      .status(500)
+      .json({ message: "An error occurred while placing the order!" });
   }
 };
-
 
 export const razorpayWebhook = async (req, res) => {
   try {
@@ -129,4 +152,3 @@ export const razorpayWebhook = async (req, res) => {
     res.status(500).json({ message: "Error in webhook handler" });
   }
 };
-
