@@ -93,8 +93,8 @@ export const bookGas = async (req, res) => {
     await newBooking.save();
 
     const razorpay = new Razorpay({
-      key_id: process.env.RAZOR_PAY_ID,
-      key_secret: process.env.RAZOR_PAY_SECRET_KEY
+      key_id: "rzp_test_mNxEJL4GdwIG29",
+      key_secret: "PVZdQouVJIY0FcDHK4QyeNNo"
     });
 
     const options = {
