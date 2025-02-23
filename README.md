@@ -121,7 +121,8 @@ For production deployment:
 For inquiries or issues, feel free to reach out:
 
 📧 **Email**: lekkaiyarajaraj2020@gmail.com  
-🌐 **Website**: [Click]([https://gas-slot-booking-web-app-frontend.netlify.app/](https://my-personal-portfolio-developer.netlify.app/))  
+
+🌐 **Website**: [Click Here](https://gas-slot-booking-web-app-frontend.netlify.app/](https://my-personal-portfolio-developer.netlify.app/)
 
 🚀 **FuelOne - Powering Smart Refueling!**  
 
