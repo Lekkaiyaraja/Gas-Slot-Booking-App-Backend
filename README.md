@@ -1,49 +1,127 @@
-# Gas Slot Booking App Backend
+# FuelOne Gas Slot Booking - Backend
 
-This project serves as the backend for the Gas Slot Booking application. It provides RESTful API endpoints for user registration, product selection, date and time slot booking, and integrates a payment gateway.
+Welcome to the **FuelOne Gas Slot Booking Backend**, a robust and scalable backend system designed to handle gas slot bookings, user authentication, payment processing, and notifications. This backend provides a seamless API for managing gas deliveries efficiently.
 
-## Project Description
+## 📌 Overview
 
-The Gas Slot Booking App Backend handles user authentication, product selection, booking functionalities, and payment integration. It provides a scalable architecture for managing gas bookings with secure authentication and transaction handling.
+The **FuelOne Gas Slot Booking Backend** is built using **Node.js** and **Express.js**, leveraging **MongoDB** for data storage. It supports user authentication, secure payment processing via Razorpay, and real-time booking management.
 
-## Files Structure
+## 🚀 Features
 
-- **userController.js**: Contains the controller functions for handling user registration, authentication and booking
-- **userRouter.js**: Defines routes for user-related operations.
-- **index.js**: Main entry point of the application.
-- **config.js**: Establishes a connection to Database.
-- **userSchema.js**: Schema for User credentials.
-- **bookingSchema.js**: Schema for booking a gas product.
-- **.env**: Environment configuration file for MongoDB connection and SMTP settings.
+- **User Authentication** (JWT-based secure authentication)
+- **Gas Slot Booking** (Users can select and book available slots)
+- **Payment Integration** (Razorpay payment gateway for seamless transactions)
+- **Email Notifications** (Order confirmations & payment status updates)
+- **Admin Controls** (Manage bookings and payment verifications)
+- **Error Handling & Security** (Protected API routes with proper error handling)
 
-## Tools and Libraries Used
+---
 
-- **bcryptjs**: Library for hashing passwords. Version: ^2.4.3
-- **cors**: Middleware for enabling Cross-Origin Resource Sharing (CORS). Version: ^2.8.5
-- **dotenv**: Module for loading environment variables from a .env file. Version: ^16.4.5
-- **express**: Web application framework for Node.js. Version: ^4.19.2
-- **jsonwebtoken**: Library for generating and verifying JSON Web Tokens (JWT). Version: ^9.0.2
-- **mongoose**: Object Data Modeling (ODM) library for MongoDB and Node.js. Version: ^8.4.3
-- **nodemailer**: Library for sending emails for user notifications. Version: ^6.9.14
-- **nodemon**: Utility that monitors changes in your Node.js application and automatically restarts the server. Version: ^3.1.3
-- **razorpay**: Node.js library for integrating the Razorpay payment gateway. Version: ^2.9.4
+## 💂️ Project Structure
 
-## Operations
+```
+FuelOne-Backend/
+│—— controllers/
+│   ├— userController.js   # Handles user authentication and profile
+│   ├— bookingController.js # Manages slot bookings and payments
+│—— routes/
+│   ├— userRoutes.js      # Routes for user authentication
+│   ├— bookingRoutes.js   # Routes for booking operations
+│—— models/
+│   ├— userSchema.js      # MongoDB schema for users
+│   ├— bookingSchema.js   # MongoDB schema for gas slot bookings
+│—— config/
+│   ├— database.js        # MongoDB connection configuration
+│—— middleware/
+│   ├— authMiddleware.js  # JWT authentication middleware
+│—— utils/
+│   ├— emailService.js    # Nodemailer email integration
+│—— .env                   # Environment variables for sensitive data
+│—— server.js              # Main application entry point
+│—— package.json           # Project dependencies and scripts
+```
 
-1. **Home**: Displays a welcome message.
-2. **User Registration**: Registers a new user.
-3. **User Login**: Authenticates a user for login.
-4. **Gas Booking**: Booking a product.
-5. **Updating payment status**: Updating payment status from default 'Pending' to
+---
 
-## Routes
+## 🛠️ Technologies Used
+
+- **Node.js** - JavaScript runtime for backend
+- **Express.js** - Web framework for building RESTful APIs
+- **MongoDB & Mongoose** - NoSQL database for storing users and bookings
+- **JWT (jsonwebtoken)** - Secure user authentication
+- **Razorpay** - Payment gateway for handling transactions
+- **Nodemailer** - Email service for order confirmations
+- **dotenv** - Environment variable management
+- **bcryptjs** - Secure password hashing
+- **cors** - Cross-Origin Resource Sharing for API access control
+
+---
+
+## 📌 API Endpoints
 
 | **Route**                 | **Method** | **Endpoint**             | **Description**                              |
-| ------------------------- | ---------- | ------------------------ | -------------------------------------------- |
-| **Register User**         | `POST`     | `/register-user`         | Registers a new user.                        |
-| **Login User**            | `POST`     | `/login-user`            | Authenticates user login.                    |
-| **Book Gas**              | `POST`     | `/booking`               | Books a gas delivery slot.                   |
-| **Update Payment Status** | `POST`     | `/update-payment-status` | Updates payment status via Razorpay webhook. |
+|-------------------------- |-----------|--------------------------|----------------------------------------------|
+| **User Registration**      | `POST`    | `/api/register`          | Registers a new user with secure hashing.  |
+| **User Login**             | `POST`    | `/api/login`             | Authenticates user and returns JWT token.  |
+| **Book Gas Slot**          | `POST`    | `/api/book-slot`         | Books a slot for gas delivery.             |
+| **Get User Bookings**      | `GET`     | `/api/user/bookings`     | Fetches booking history for a user.        |
+| **Update Payment Status**  | `POST`    | `/api/payment-update`    | Updates payment status after transaction.  |
 
-For more details on the Gas Slot Booking App Backend, visit the [GitHub Repository](https://github.com/Lekkaiyaraja/Gas-Slot-booking-app-Backend).
+---
+
+## 🛠️ Setup Instructions
+
+### 1️⃣ Clone Repository
+```sh
+git clone https://github.com/Lekkaiyaraja/Gas-Slot-Booking-App-Backend.git
+cd Gas-Slot-Booking-App-Backend
+```
+
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
+
+### 3️⃣ Configure Environment Variables
+Create a `.env` file in the root directory and add:
+```env
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-jwt-secret
+RAZORPAY_KEY_ID=your-razorpay-key-id
+RAZORPAY_KEY_SECRET=your-razorpay-key-secret
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-email-password
+```
+
+### 4️⃣ Start the Server
+```sh
+npm start
+```
+
+---
+
+## 📡 Deployment
+
+For production deployment:
+1. Use **Docker** or **PM2** for process management.
+2. Deploy on **AWS, DigitalOcean, or Heroku**.
+3. Use **MongoDB Atlas** for cloud-based database management.
+
+---
+
+## 🔗 Repository Links
+
+- **Frontend Repository**: [FuelOne Gas Slot Booking Frontend](https://github.com/Lekkaiyaraja/Gas-Slot-Booking-App-Frontend)
+- **Backend Repository**: [FuelOne Gas Slot Booking Backend](https://github.com/Lekkaiyaraja/Gas-Slot-Booking-App-Backend)
+
+---
+
+## 📞 Contact
+
+For inquiries or issues, feel free to reach out:
+
+📧 **Email**: lekkaiyarajaraj2020@gmail.com  
+🌐 **Website**: [Website]([https://gas-slot-booking-web-app-frontend.netlify.app/](https://my-personal-portfolio-developer.netlify.app/))  
+
+🚀 **FuelOne - Powering Smart Refueling!**  
 
